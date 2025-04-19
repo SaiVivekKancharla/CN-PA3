@@ -165,3 +165,174 @@ steps:
 5. Add your scheme to `SCHEMES` in `.travis.yml` for continuous integration testing.
 
 6. Send us a pull request and that's it, you're in the Pantheon!
+
+README in Details for the ASSIGNMENT
+
+# Pantheon Network Emulation Framework - Setup and Usage Guide
+
+## Table of Contents
+1. [Overview](#overview)
+2. [System Requirements](#system-requirements)
+3. [Installation](#installation)
+4. [Basic Usage](#basic-usage)
+5. [Running Experiments](#running-experiments)
+6. [Data Collection](#data-collection)
+7. [Troubleshooting](#troubleshooting)
+8. [References](#references)
+
+## Overview
+Pantheon is a framework for evaluating congestion control algorithms under consistent network conditions using mahimahi network emulation. This guide will help you set up the environment and run experiments comparing different congestion control protocols.
+
+## System Requirements
+- **Operating System**: Ubuntu 18.04/20.04 LTS (recommended)
+- **Memory**: Minimum 4GB RAM
+- **Storage**: 10GB free disk space
+- **Python**: 2.7 and 3.x
+- **Dependencies**: git, build-essential, and other packages listed below
+
+## Installation
+
+### 1. Clone the Pantheon Repository
+```bash
+git clone https://github.com/StanfordSNR/pantheon.git
+cd pantheon
+```
+
+### 2. Install System Dependencies
+```bash
+sudo apt update
+sudo apt install -y \
+    git build-essential autotools-dev dh-autoreconf \
+    iptables protobuf-compiler libprotobuf-dev pkg-config \
+    libssl-dev dnsmasq-base ssl-cert libxcb-present-dev \
+    libcairo2-dev libpango1.0-dev iproute2 apache2-bin \
+    xorg-dev libudns-dev libev-dev libevent-dev libtool \
+    apache2-dev python-dev python3-dev python3-pip
+```
+
+### 3. Install Mahimahi (Network Emulator)
+```bash
+git clone https://github.com/ravinet/mahimahi.git
+cd mahimahi
+./autogen.sh
+./configure --prefix=/usr/local
+make -j$(nproc)
+sudo make install
+sudo ldconfig
+cd ..
+```
+
+### 4. Enable IP Forwarding
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
+```
+
+### 5. Set Up Python Environment
+```bash
+# For Python 2.7 support
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+python2.7 get-pip.py
+python2.7 -m pip install virtualenv
+
+# Create virtual environment
+python2.7 -m virtualenv venv
+source venv/bin/activate
+pip install -r src/requirements.txt
+```
+
+## Basic Usage
+
+### Verify Installation
+```bash
+./tools/test.sh
+```
+This will run a basic test between Cubic and BBR congestion control algorithms.
+
+### Test Mahimahi Functionality
+```bash
+mm-delay 10 echo "Mahimahi test successful"
+```
+
+## Running Experiments
+
+### 1. Select Protocols
+Choose 3 congestion control protocols from the available options:
+- cubic
+- bbr
+- vegas
+- reno
+- sprout
+- verus
+- indigo
+- pcc
+
+### 2. Run Experiments
+
+#### High-Bandwidth, Low-Latency Scenario (50Mbps, 10ms RTT)
+```bash
+python src/experiments/test.py \
+    --schemes cubic bbr vegas \
+    --mm-delay 10 \
+    --bw 50 \
+    --run-times 60
+```
+
+#### Low-Bandwidth, High-Latency Scenario (1Mbps, 200ms RTT)
+```bash
+python src/experiments/test.py \
+    --schemes cubic bbr vegas \
+    --mm-delay 200 \
+    --bw 1 \
+    --run-times 60
+```
+
+### 3. Data Collection
+All output data will be saved in:
+```
+pantheon/analysis/
+```
+Files include:
+- `throughput.csv`
+- `delay.csv`
+- `loss.csv`
+- `stats.txt`
+
+## Data Analysis
+
+### Generate Plots
+```bash
+python src/analysis/analyze.py \
+    --data-dir analysis \
+    --schemes cubic bbr vegas
+```
+
+Plots will be saved as PNG files in the analysis directory.
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Python 2.7 not found**:
+   ```bash
+   sudo apt install python2.7 python2.7-dev
+   ```
+
+2. **Mahimahi not working**:
+   ```bash
+   sudo setcap cap_net_admin+ep /usr/local/bin/mm-delay
+   sudo setcap cap_net_admin+ep /usr/local/bin/mm-link
+   ```
+
+3. **Missing dependencies**:
+   ```bash
+   sudo apt --fix-broken install
+   ```
+
+## References
+1. [Pantheon Paper](https://cs.slu.edu/~esposito/pantheon.pdf)
+2. [Mahimahi Paper](https://cs.slu.edu/~esposito/mahimahi-sigcomm2014.pdf)
+3. [Pantheon GitHub](https://github.com/StanfordSNR/pantheon)
+
+---
+
