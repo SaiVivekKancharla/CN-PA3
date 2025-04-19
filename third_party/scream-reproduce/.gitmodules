@@ -1,0 +1,4 @@
+[submodule "scream_upstream"]
+	path = scream_upstream
+	url = https://github.com/EricssonResearch/scream.git
+	ignore = dirty

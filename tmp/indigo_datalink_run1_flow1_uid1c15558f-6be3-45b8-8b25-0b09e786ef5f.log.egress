@@ -1,0 +1,1 @@
+# 'mm-tunnelclient' '--ingress-log=/home/saivivek/pantheon/tmp/indigo_acklink_run1_flow1_uid1c15558f-6be3-45b8-8b25-0b09e786ef5f.log.ingress' '--egress-log=/home/saivivek/pantheon/tmp/indigo_datalink_run1_flow1_uid1c15558f-6be3-45b8-8b25-0b09e786ef5f.log.egress' '10.0.0.1' '51874' '100.64.0.2' '100.64.0.1' egress: 1745089326027.107

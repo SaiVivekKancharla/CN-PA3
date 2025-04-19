@@ -1,0 +1,10 @@
+# 'mm-tunnelclient' '--ingress-log=/home/saivivek/pantheon/tmp/webrtc_acklink_run1_flow1_uid3b47d3a4-b623-4b28-a143-607a7ed138ea.log.ingress' '--egress-log=/home/saivivek/pantheon/tmp/webrtc_datalink_run1_flow1_uid3b47d3a4-b623-4b28-a143-607a7ed138ea.log.egress' '10.0.0.1' '52294' '100.64.0.2' '100.64.0.1' ingress: 1745088843408.283
+10473.177 - 0 - 96
+10473.426 - 1 - 96
+10473.459 - 2 - 96
+10473.473 - 3 - 96
+11973.984 - 4 - 96
+11974.253 - 5 - 96
+11974.320 - 6 - 96
+11974.353 - 7 - 96
+11974.402 - 8 - 96

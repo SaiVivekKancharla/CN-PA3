@@ -1,0 +1,5 @@
+Sender usage:
+./vivace_sender server_ip server_port [packet size]
+
+Receiver usage:
+./vivace_receiver [server_port]

@@ -1,0 +1,4 @@
+# 'mm-tunnelclient' '--ingress-log=/home/saivivek/pantheon/tmp/cubic_acklink_run1_flow1_uidd085a192-47bf-43af-98b4-96227f59756c.log.ingress' '--egress-log=/home/saivivek/pantheon/tmp/cubic_datalink_run1_flow1_uidd085a192-47bf-43af-98b4-96227f59756c.log.egress' '10.0.0.1' '36377' '100.64.0.2' '100.64.0.1' ingress: 1745090639416.502
+8976.875 - 0 - 96
+8977.345 - 1 - 96
+8977.412 - 2 - 96

@@ -1,0 +1,1 @@
+# 'mm-tunnelclient' '--ingress-log=/home/saivivek/pantheon/tmp/scream_acklink_run1_flow1_uid7c5b1970-c7d0-4eae-b358-1d0b42e9c893.log.ingress' '--egress-log=/home/saivivek/pantheon/tmp/scream_datalink_run1_flow1_uid7c5b1970-c7d0-4eae-b358-1d0b42e9c893.log.egress' '10.0.0.1' '37353' '100.64.0.2' '100.64.0.1' egress: 1745089499875.697
